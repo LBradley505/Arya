@@ -1,0 +1,62 @@
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+// Font Awesome 
+@import "node_modules/font-awesome/scss/font-awesome";
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+.pad-top {
+	margin-top:20px;
+}
+
+#editor { 
+	position: absolute;
+	height:100%;
+	width:97.5%;
+	font-size: 14px;
+	border: 2px solid #e0e0e0;
+	border-radius: 5px;
+}
+
+
+#submit {
+	float:right;
+	margin-top:15px;
+}
+
+.connection-list .list-group-item {
+	cursor: pointer;
+}
+.connection-list > a.list-group-item.active {
+	color:#FFF;
+}
+
+.list-group-item.active::after {
+	font-family: FontAwesome;
+	content:"\f00c";
+	float:right;
+}
+
+
+
+#overlay {
+	z-index: 50000;
+    position: relative;
+    background: rgba(142, 142, 142, 0.58);
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    display: none;
+	transition-delay: 0.5s;
+}
+
+#overlay .fa {
+	font-size: 52px;
+    color: #3097D1;
+	position: absolute;
+    top: 39%;
+}
