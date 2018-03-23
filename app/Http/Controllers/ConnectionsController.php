@@ -12,7 +12,7 @@ class ConnectionsController extends Controller
 
 	public function getConnections() 
 	{
-dd("conncted  to database - ".DB::connection()->getDatabaseName());
+
 		$cons = Config::get('database.connections');
  		return view('main', compact('cons'));
 	}
