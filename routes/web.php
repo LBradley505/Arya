@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get( '/', 'ConnectionsController@getConnections');
 Auth::routes();
@@ -23,3 +23,7 @@ Route::post( 'query', 'ConnectionsController@query');
 
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

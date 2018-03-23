@@ -1017,12 +1017,13 @@ $('#submit').click(function () {
 
 	var databases = $('.connection-list > a.active');
 	databases.each(function (index, val) {
+		var db_group = $(this).data('group');
 		var id = $(this).data('id');
 		var is_last_item = index == databases.length - 1;
 		$.ajax({
 			type: 'POST',
 			url: '/query',
-			data: { 'database': $(this).data('id'), 'sql': textarea.val() },
+			data: { 'group': db_group, 'database': $(this).data('id'), 'sql': textarea.val() },
 			success: function success(data) {
 				//show feedback (errors or success)
 				try {

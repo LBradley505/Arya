@@ -10,7 +10,9 @@ use Response;
 class ConnectionsController extends Controller
 {
 
-	public function getConnections() {
+	public function getConnections() 
+	{
+dd("conncted  to database - ".DB::connection()->getDatabaseName());
 		$cons = Config::get('database.connections');
  		return view('main', compact('cons'));
 	}
@@ -19,22 +21,34 @@ class ConnectionsController extends Controller
 
 	// }
 
-	public function query(Request $request) {
-		if($request->isMethod('post')){
+	public function query(Request $request) 
+	{
+		if($request->isMethod('post'))
+		{
 
 			//if we get a error catch it, format it and pass it back in the ajax / if not return true
-			try { 
+			try 
+			{ 
 				$response = Response::json(DB::connection($request['database'])->statement($request['sql']));
-			} catch(\Illuminate\Database\QueryException $ex) { 
+			} catch(\Illuminate\Database\QueryException $ex) 
+			{ 
 				$response = json_encode($ex->getMessage());
 			}
 
 			return $response;
 
 
-		} else {
+		} else 
+		{
 			//do other stuff
 		}
+	}
+
+	public function viewSchema() 
+	{
+
+
+
 	}
 
 	// public function close() {
