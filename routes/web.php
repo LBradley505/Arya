@@ -15,15 +15,18 @@
 //     return view('welcome');
 // });
 
-Route::get( '/', 'ConnectionsController@getConnections');
+Route::get('/', 'HomeController@index')->name('home');
 Auth::routes();
 
-//AJAX
-Route::post( 'query', 'ConnectionsController@query');
+Route::group(['middleware' => ['auth']], function() {
+	Route::get( '/connections', 'ConnectionsController@display')->name('connections');
+	Route::get( '/query', 'ConnectionsController@getConnectionList')->name('query');
+
+	//AJAX
+	Route::post( 'query', 'ConnectionsController@query');
+	Route::post( 'connections', 'ConnectionsController@create');
+});
 
 
 
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

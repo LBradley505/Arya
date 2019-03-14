@@ -6,12 +6,15 @@
 		<div class="col-2">
 
 			<div class="databases">
-			@foreach ($cons as $key => $con)
-				<h4>{{ $key }}</h4>
+			@foreach ($hosts as $host)
+
+				<h4>{{ $host->name }}</h4>
 				<div class="list-group connection-list">
-				@foreach ($con as $name => $connection)
-					<a class="list-group-item list-group-item-action active" data-group="{{ $key }}" data-id="{{ $name }}">{{ $name }}</a>
+				@foreach ($host->connections as $connection)
+					<a class="list-group-item list-group-item-action active" data-id="{{ $connection->site_name }}">{{ $connection->site_name }}</a>
+
 				@endforeach
+
 				</div>
 			@endforeach
 			</div>

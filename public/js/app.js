@@ -993,6 +993,50 @@ var app = new Vue({
 	el: '#app'
 });
 
+/******************************************************************************************************* */
+/****************************************** ADD CONNECTION PAGE **************************************** */
+/******************************************************************************************************* */
+
+// TO DO - only run this section when on the query page, currently running on every page
+
+$('#new_connection_data').submit(function (e) {
+	e.preventDefault();
+	var form = document.getElementById('new_connection_data');
+
+	form.classList.add('was-validated');
+	if (form.checkValidity() === false) {} else {
+		$.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+		});
+
+		//switch to jquery format so we can pass to ajax
+		form = $('#new_connection_data');
+		$.ajax({
+			type: 'POST',
+			url: 'connections',
+			data: form.serialize(),
+			success: function success(data) {
+				//show feedback (errors or success)
+				try {
+					data = JSON.parse(data);
+				} catch (e) {
+					//JSON parse error, this is not json (or JSON isn't in your browser)
+					console.log(e);
+				}
+			}
+		});
+	}
+});
+
+/******************************************************************************************************* */
+/****************************************** QUERY PAGE ************************************************* */
+/******************************************************************************************************* */
+
+// TO DO - only run this section when on the query page, currently running on every page
+
+
 $('.list-group-item').click(function () {
 	$(this).toggleClass('active');
 });

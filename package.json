@@ -20,6 +20,8 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
+        "doctrine": "^2.1.0",
+        "doctrine-dbal": "^0.1.2",
         "font-awesome": "^4.7.0",
         "highlight.js": "^9.12.0"
     }
