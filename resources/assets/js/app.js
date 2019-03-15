@@ -25,7 +25,7 @@ const app = new Vue({
 /****************************************** ADD CONNECTION PAGE **************************************** */
 /******************************************************************************************************* */
 
-// TO DO - only run this section when on the query page, currently running on every page
+// TODO - only run this section when on the connection page, currently running on every page
 
 $('#new_connection_data').submit(function(e) {
 	e.preventDefault();
@@ -41,7 +41,6 @@ $('#new_connection_data').submit(function(e) {
 			}
 		});
 	
-		//switch to jquery format so we can pass to ajax
 		form = $('#new_connection_data');
 		$.ajax({
 			type: 'POST',
@@ -70,7 +69,7 @@ $('#new_connection_data').submit(function(e) {
 /****************************************** QUERY PAGE ************************************************* */
 /******************************************************************************************************* */
 
-// TO DO - only run this section when on the query page, currently running on every page
+// TODO - only run this section when on the query page, currently running on every page
 
 
 $('.list-group-item').click(function() {

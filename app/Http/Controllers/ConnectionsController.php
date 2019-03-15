@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Connection;
 use Illuminate\Http\Request;
-use Config;
-use DB;
+use Illuminate\Config;
+use Illuminate\Support\Facades\DB;
 use Response;
 use \App\Host;
 
@@ -16,16 +17,19 @@ class ConnectionsController extends Controller
 	 *
 	 * @return void
 	 */
-	public function create()
+	public function create(Request $request)
 	{
 
-		$_POST['display_name'] = isset($_POST['display_name'])? "" : '';
-		$_POST['display_name'] = isset($_POST['display_name'])? "" : '';
-		$_POST['display_name'] = isset($_POST['display_name'])? "" : '';
-		$_POST['display_name'] = isset($_POST['display_name'])? "" : '';
+//	    dd($request);
 
+	    $connection = new Connection;
 
+        $connection->host_id  = $request->get('host');
+        $connection->user     = $request->get('mysql_user');
+        $connection->password = $request->get('mysql_password');
+        $connection->site_name   = $request->get('display_name');
 
+        $connection->save();
 	}
 
 	/**
@@ -47,16 +51,16 @@ class ConnectionsController extends Controller
 	public function getConnectionList() 
 	{
 
-#		$cons = App\connection;
+//		$cons = App\connection;
 		$host = new Host;
 		$hosts = $host->withconnections();
 
 		return view('main', compact('hosts'));
 	}
 
-	// public function connect() {
-
-	// }
+//	public function connect() {
+//
+//	}
 
 	public function query(Request $request) 
 	{
@@ -69,9 +73,30 @@ class ConnectionsController extends Controller
 
 #TO-DO  - update the db params in config and use the posted ones to run the query
 
-				var_dump($request['database']);
-$response = Response::json(DB::connection($request['database'])->statement($request['sql']));
-				dd($response);
+//				var_dump($request['database']);
+
+                //select datapase options from database
+                $site_to_query = Connection::with('host')->where('site_name', $request['database'])->first();
+
+
+                //set database params in config
+                Config([
+                    'database.connections.site_database' => [
+                        'driver' => 'mysql',
+                        'host'  => $site_to_query->host->ip_address,
+                        'port' => '3306',
+                        'database' => $site_to_query->user,
+                        'username' => $site_to_query->user,
+                        'password' => $site_to_query->password,
+                    ]
+                ]);
+
+//               DB::purge($site_to_query->site_database);
+
+//               dump(DB::connection('site_database'));
+                $response = Response::json(DB::connection('site_database')->statement($request['sql']));
+                dump($response);
+                die($response);
 
 			} catch(\Illuminate\Database\QueryException $ex)
 			{ 

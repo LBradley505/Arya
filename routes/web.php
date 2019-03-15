@@ -15,12 +15,12 @@
 //     return view('welcome');
 // });
 
-Route::get('/', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function() {
+    Route::get('/', 'ConnectionsController@getConnectionList')->name('query');
 	Route::get( '/connections', 'ConnectionsController@display')->name('connections');
-	Route::get( '/query', 'ConnectionsController@getConnectionList')->name('query');
+//	Route::get( '/query', 'ConnectionsController@getConnectionList')->name('query');
 
 	//AJAX
 	Route::post( 'query', 'ConnectionsController@query');
