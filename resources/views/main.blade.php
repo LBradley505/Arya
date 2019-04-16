@@ -32,13 +32,13 @@
 					<div class="col-12">
 						<button type="button" id="submit" class="btn btn-primary">Submit</button>
 					</div>
+					<div class="row pad-top">
+						<div class="col-12">
+							<div id="feedback"></div>
+						</div>
+					</div>
 			</div>
 	  	</div>
-	</div>
-	<div class="row pad-top">
-		<div class="col-12">
-			<div id="feedback"></div>
-		</div>
 	</div>
 </div>
 

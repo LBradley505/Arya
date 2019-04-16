@@ -30,6 +30,10 @@ class ConnectionsController extends Controller
         $connection->site_name   = $request->get('display_name');
 
         $connection->save();
+
+        $request->session()->flash('success', $request->get('display_name') . ' added!');
+
+//        $this->display();
 	}
 
 	/**
@@ -95,8 +99,6 @@ class ConnectionsController extends Controller
 
 //               dump(DB::connection('site_database'));
                 $response = Response::json(DB::connection('site_database')->statement($request['sql']));
-                dump($response);
-                die($response);
 
 			} catch(\Illuminate\Database\QueryException $ex)
 			{ 

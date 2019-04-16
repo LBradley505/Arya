@@ -48,12 +48,9 @@ $('#new_connection_data').submit(function(e) {
 			data: form.serialize(),
 			success: function(data) {
 				//show feedback (errors or success)
-				try {
-					data = JSON.parse(data);
-				} catch(e) {
-					//JSON parse error, this is not json (or JSON isn't in your browser)
-					console.log(e);
-				}
+                    location.reload();
+					// data = JSON.parse(data);
+					// console.log(data);
 			}
 		});
 
